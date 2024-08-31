@@ -1,4 +1,4 @@
-export class SublimatedObject extends Element {
+export class SublimatedEntity extends Element {
   // this.def.type;         // "Array", "Object", "Element", etc
   // this.def.length;    - if "Array"
   // this.def.reference;    // sublimated reference
@@ -18,58 +18,7 @@ export class SublimatedObject extends Element {
 
     if (!this.def) return [];
 
-    return this.def.type == "Array" 
-      ? this.renderArray() 
-      : this.renderObject();
-  }
-
-  renderArray() {
-    let atts = {};
-    let details = [];
-
-    if (this.expanded) {
-      atts = {expanded: ""};
-      let n = 0;
-      const list = [];
-      for (const val of (this.def.elements || [])) {
-        const key = (n++).toString();
-        list.push(<span>{key} :</span>);
-        list.push(SublimatedValue(this.channel, val, key));
-        if (n > 10) {
-          list.push(<text>{this.def.length - 10} elements more...</text>);
-          break;
-        }
-      }
-      details = <div .details>{list}</div>;
-    }
-    return <var .coll {atts} type={this.def.type}><caption>Array({this.def.length})</caption>{details}</var>;
-  }
-
-  renderObject() {
-    let atts = {};
-    let details = [];
-
-    if (this.expanded) {
-      atts = {expanded: ""};
-      let n = 0;
-      const list = [];
-      if (this.def?.properties) {
-        for (const [key, val] of Object.entries(this.def.properties)) {
-          list.push(<span>{key} :</span>);
-          list.push(SublimatedValue(this.channel, val, key));
-          if (++n > 32) {
-            list.push(<text>{this.def.length - 32} names more...</text>);
-            break;
-          }
-        }
-      }
-      details = <div .details>{list}</div>;
-    }
-
-    if (this.def.caption)
-      return <var .coll {atts} type={this.def.type}><caption>{this.def.caption}</caption>{details}</var>;
-    else
-      return <var .coll {atts} type={this.def.type}><caption>Object</caption>{details}</var>;
+    return this.doRender();
   }
 
   async requestDetails() {
@@ -95,6 +44,86 @@ export class SublimatedObject extends Element {
     evt.stopPropagation();
   }
 }
+
+export class SublimatedArray extends SublimatedEntity {
+  constructor(props) {
+    super(props);
+  }
+
+  doRender() {
+    let atts = {};
+    let details = [];
+
+    if (this.expanded) {
+      atts = {expanded: ""};
+      let n = 0;
+      const list = [];
+      for (const val of (this.def.elements || [])) {
+        const key = (n++).toString();
+        list.push(<span>{key} :</span>);
+        list.push(SublimatedValue(this.channel, val, key));
+        if (n > 10) {
+          list.push(<text>{this.def.length - 10} elements more...</text>);
+          break;
+        }
+      }
+      details = <div .details>{list}</div>;
+    }
+    return <var .coll {atts} type={this.def.type}><caption>Array({this.def.length})</caption>{details}</var>;
+  }
+}
+
+export class SublimatedObject extends SublimatedEntity {
+  constructor(props) {
+    super(props);
+  }
+
+  doRenderDetails() {
+
+    let atts = {};
+    let details = [];
+
+    if (this.expanded) {
+      atts = {expanded: ""};
+      let n = 0;
+      const list = [];
+      if (this.def?.properties) {
+        for (const [key, val] of Object.entries(this.def.properties)) {
+          list.push(<span>{key} :</span>);
+          list.push(SublimatedValue(this.channel, val, key));
+          if (++n > 32) {
+            list.push(<text>{this.def.length - 32} names more...</text>);
+            break;
+          }
+        }
+      }
+      details = <div .details>{list}</div>;
+    }
+    return [atts,details]; 
+  }
+
+  doRender() {
+    let [atts,details] = this.doRenderDetails();
+    if (this.def.caption)
+      return <var .coll {atts} type={this.def.type}><caption>{this.def.caption}</caption>{details}</var>;
+    else
+      return <var .coll {atts} type={this.def.type}><caption>Object</caption>{details}</var>;
+  }
+}
+
+export class SublimatedElement extends SublimatedObject {
+  doRender() {
+    let [atts,details] = this.doRenderDetails();
+    return <var .coll {atts} type={this.def.type}><caption><text>{this.def.caption}</text><icon|my-location /></caption>{details}</var>;
+  }
+
+  ["on click at icon"](evt) {
+    const elementUid = this.def.uid;
+    this.postEvent(new Event("navigate-to", {bubbles: true, data:elementUid}));
+    return true;
+  }
+}
+
 
 const RE_FILE_LINE = /[(](\w+:[^()]+(?:[:]\d+|[(]\d+[)]))[)]/g;
 
@@ -137,7 +166,11 @@ export function SublimatedValue(channel, val, key, forLog = false) {
       return <var .number.big key={key}>{val.toString()}n</var>;
     case "object":
       if (val !== null)
-        return <SublimatedObject channel={channel} def={val} key={key} />;
+        switch(val.type) {
+          case "Array": return <SublimatedArray channel={channel} def={val} key={key} />;
+          case "Element": return <SublimatedElement channel={channel} def={val} key={key} />;
+          default: return <SublimatedObject channel={channel} def={val} key={key} />;
+        }
       // else fall through
     default:
       return <var .other key={key}>{JSON.stringify(val)}</var>;

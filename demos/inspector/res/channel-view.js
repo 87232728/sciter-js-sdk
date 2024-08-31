@@ -7,6 +7,7 @@ import {DebuggerView} from "debugger.js";
 
 export class ChannelView extends Element {
   channel = null;
+  stack = null; // dom element stack
 
   constructor(props) {
     super();
@@ -23,8 +24,9 @@ export class ChannelView extends Element {
     switch (this.currentView) {
       default:
       case "DOMView":
-        viewContent = <DOMView channel={this.channel} />;
+        viewContent = <DOMView channel={this.channel} stack={this.stack} />;
         headerViewContent = DOMView.header(this.channel);
+        this.stack = null;        
         break;
       case "FilesView":
         {
@@ -107,6 +109,7 @@ export class ChannelView extends Element {
     return false;
   }
 
+
   ["on file-show"](evt) {
     const newState = {
       currentView: "FilesView",
@@ -132,4 +135,12 @@ export class ChannelView extends Element {
   requestUpdate() {
     this.timer(1000, this.componentUpdate);
   }
+
+  async ["on navigate-to"](evt) {
+    const elementUid = evt.data;
+    const stack = await this.channel.request("stackOf", elementUid);
+    this.componentUpdate({currentView: "DOMView", stack});
+    return true;
+  }
+
 }

@@ -21,73 +21,31 @@
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
-            buildForTesting = "NO"
+            buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "67CCB04A6B3D827CECAA268A"
-               BuildableName = "packfolder"
-               BlueprintName = "packfolder"
-               ReferencedContainer = "container:../../../../build.js/macosx/packfolder.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "NO"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "23F4B66074084B12F6867CA0"
-               BuildableName = "qjsc"
-               BlueprintName = "qjsc"
-               ReferencedContainer = "container:../../../../build.js/macosx/qjsc.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "NO"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "173178B210977A240432D6F2"
                BuildableName = "libsciter.dylib"
                BlueprintName = "sciter"
-               ReferencedContainer = "container:../../../../build.js/macosx/sciter.xcodeproj">
+               ReferencedContainer = "container:../../../../build/macosx/sciter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
-            buildForTesting = "NO"
+            buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "46DB93FD7F965A6F0F2D923D"
-               BuildableName = "qjs"
-               BlueprintName = "qjsi"
-               ReferencedContainer = "container:../../../../build.js/macosx/qjsi.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "NO"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A49CD7A1CCD79053B4731DE1"
-               BuildableName = "sciter-webview.dylib"
-               BlueprintName = "sciter-webview"
-               ReferencedContainer = "container:../../../build/macosx/sciter-webview.xcodeproj">
+               BlueprintIdentifier = "67CCB04A6B3D827CECAA268A"
+               BuildableName = "packfolder"
+               BlueprintName = "packfolder"
+               ReferencedContainer = "container:../../../../build/macosx/packfolder.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -127,15 +85,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "49527825260688710002A42C"
-            BuildableName = "usciterjs.app"
-            BlueprintName = "usciterjs"
-            ReferencedContainer = "container:usciterjs.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

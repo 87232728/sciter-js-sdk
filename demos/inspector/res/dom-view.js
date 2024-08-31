@@ -2,6 +2,7 @@ import {View} from "view.js";
 import * as Settings from "settings.js";
 
 export class DOMView extends View {
+
   constructor(props) {
     super(props, "DOMView");
   }
@@ -88,7 +89,6 @@ export class DOMView extends View {
       for (const ch of el.children)
         this.reloadElement(ch);
     }
-
     this.componentUpdate();
   }
 
@@ -107,7 +107,14 @@ export class DOMView extends View {
     return true;
   }
 
+  this(props) {
+    if(props.stack) {
+      this.post( () => this.showStack(props.stack));
+    }
+  }
+
   render() {
+    
     if (!this.channel.connected) {
       return <div styleset="facade.css#channel-close">
         This channel is not connected. <span #channel-close>Close it.</span>
@@ -339,7 +346,7 @@ class DynamicStyle extends View {
       this.post(()=>{this.$('form > input(val)').focus()});
       return;
     }
-    
+
     const toeval = `this.style.setProperty("${prop}", "${val}")`;
     this.channel.notify("toeval", [toeval, false]);
 
@@ -370,8 +377,8 @@ class DynamicStyle extends View {
       }
     }
     this.state[index].checked = el.value;
-    const toeval = `this.style.setProperty("${prop}", "${val}")`;
-    this.channel.notify("toeval", [toeval, false]);
+      const toeval = `this.style.setProperty("${prop}", "${val}")`;
+      this.channel.notify("toeval", [toeval, false]);
     this.componentUpdate();
     this.postEvent(
       new Event('set-style-dynamic', {
@@ -505,7 +512,7 @@ export class ElementDetailsView extends View {
     const prop = el.getAttribute('prop');
     const val = this.$(`dd:not([index])[prop=${prop}]`).innerText;
     this.setStyle(prop, el.value ? val : "unset");
- 
+
     const state = this.$$(`input|checkbox:not(:checked)`).map((el)=>el.getAttribute('prop'));
     Object.assign(this.viewstate.styleStates?.get(this.viewstate.currentUid), {used: state});
   }

@@ -1,3 +1,22 @@
+## 5.0.3.15
+
+### Fixes:
+
+* Fix of `sciter.encode()` for UTF16-LE/GE;
+* Fix of `option.execCommand("set-current");`;
+* [Fetch] Fix of `response.text()`;
+* [MacOSX] Fix of `WINDOW_SHOWN` after `WINDOW_HIDDEN`;
+* `Window.this.on("trayiconclick")` fix of coordinates (that are in dips now);
+* `<input|time>` increment buttons -> change event generation;
+* fix of potential AV , see : https://sciter.com/forums/topic/rare-crash-during-animation/ ;
+* Windows/Skia, fix of animated popup show.
+
+### New:
+
+* [HTTP client/Fetch] support of `request.body = file /*instance of File*/`; to upload files without copying them into RAM. 
+* `Image.compose()` - more operations, see the [discussion](https://sciter.com/forums/topic/blendmode-support/#post-86781) and sdk/samples.sciter/graphics/image-composition.htm 
+* [inspector] Element output representation and "get DOM location" feature.
+
 ## 5.0.3.14
 
 ### Fixes:

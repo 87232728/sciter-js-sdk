@@ -415,22 +415,36 @@ var.coll {
   border:1px solid #ddd;
 } 
 
-var.coll > caption {
+var.coll .details-activator {
   behavior:clickable;
   cursor:pointer;
+}
+
+var.coll > caption {
   padding-left:1.2em;
-  padding-right:0.6em;
-  background-image: url(path:M1152 896q0 26-19 45l-448 448q-19 19-45 19t-45-19-19-45v-896q0-26 19-45t45-19 45 19l448 448q19 19 19 45z);
-  background-size: 0.4em 0.6em;
+  padding-right:1.2em;
+  background-image: icon(right);
+  //background-size: 1em;
   background-repeat: no-repeat;
-  background-position: 0.6em 0.4em;
+  background-position: top 0.1em 0.1em;
   fill:#888;
 } 
 
 var.coll[expanded] > caption {
-  background-image: url(path:M1408 704q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45z);
-  background-size: 0.6em 0.4em;
-  background-position: 0.4em 0.6em;
+  background-image: icon(down);
+}
+
+var|Element.coll > caption {
+  behavior:null;
+  flow:horizontal;
+  border-spacing:0.5em;
+  padding-right:0;
+}
+
+var|Element.coll > caption > icon {
+  behavior:clickable;
+  cursor:pointer;
+  margin:* 0;
 }
 
 
