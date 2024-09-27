@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>Test</title>
+        <style>
+
+img {
+    width:128px;
+    height:64px;
+    border:1px solid;
+}
+
+        </style>
+        <script|module>
+
+import { Line } from "./micro-chart.js";
+
+let data = [];
+
+for( let n = 0; n < 32; ++n ) 
+  data.push(Math.random() * 32);
+
+let lineChart;
+document.body.append(<Line data={ data } min={0} max={32} var={lineChart} />);
+
+document.timer(300ms, function() {
+  data.shift();
+  data.push(Math.random() * 32);
+  lineChart.data = data;
+  return true;
+});
+
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
