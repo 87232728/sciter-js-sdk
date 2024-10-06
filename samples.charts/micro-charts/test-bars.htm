@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>Test</title>
+        <style>
+
+
+
+.chart {
+    width:128px;
+    height:64px;
+    border:1px solid;
+    padding:2px;
+}
+
+        </style>
+        <script|module>
+
+import { Bars } from "./micro-chart.js";
+
+let data = [];
+for( let n = 0; n < 15; ++n ) 
+  data.push(Math.random());
+
+document.body.append(<section>
+  <header>
+    Bars data=array
+  </header>
+  <Bars data={data} />
+</section>);
+
+document.body.append(<section>
+  <header>
+    Bars data=array colors=array
+  </header>
+  <Bars data={data} colors={["red","gold","green","blue","magenta"]}/>
+</section>);
+
+document.body.append(<section>
+  <header>
+    Bars data=array thickness=0...1
+  </header>
+  <Bars data={data} thickness={0.3}/>
+  <Bars data={data} thickness={0.8}/>
+</section>);
+
+
+/*document.timer(300ms, function() {
+  data.shift();
+  data.push(Math.random() * 32);
+  lineChart.data = data;
+  return true;
+});*/
+
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

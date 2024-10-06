@@ -212,6 +212,7 @@ namespace pod
 
       void push(T c)                { *reserve(1) = c; ++_size; }
       void push(const T *pc, size_t sz) { copy(reserve(sz),pc,sz); _size += sz; }
+      T pop() { if (_size) return _body[--_size]; return 0; }
 
       void clear()                  { _size = 0; }
 
@@ -292,6 +293,7 @@ namespace utf8
       }
       outbuf.push( WCHAR(b) );
     }
+    outbuf.push(0); outbuf.pop();
     return num_errors == 0;
   }
 

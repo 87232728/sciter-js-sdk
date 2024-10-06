@@ -256,7 +256,8 @@ namespace webview
     void SciterEdgeWebView::navigate(const std::string &url)
     {
         aux::utf2w wurl(url.c_str());
-        m_webview->Navigate(wurl.c_str());
+        HRESULT hr = m_webview->Navigate(wurl.c_str());
+        assert(SUCCEEDED(hr));
     }
 
     void SciterEdgeWebView::set_html(const std::string &html)

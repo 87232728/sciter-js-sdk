@@ -1,3 +1,24 @@
+## 5.0.3.16
+
+### Fixes:
+
+* fetch/async compatibility fix;
+* [CSS] Fix of "a b" selector, see: https://sciter.com/forums/topic/animation-issue-for-loader/;
+* [osx] fix of touch scroll stability;
+* [Win11] disabling popup animation when direct composition is enabled;
+* [inspector] minor style fixes...
+* [css] fix of `transform` transitions, see https://sciter.com/forums/topic/incorrect-transition-behaviors/
+* [css] fix of `text-shadow` inheritance; 
+* [css] fix of `::marker` / `z-index` handling;
+
+### New:
+
+* menu-bar accesskey on top level menus;
+* fix of ESC handling in menu-bar ctl;
+* Sora Yang patches:
+  * Support of multiple folder selection in Window.this.selectFolder({...,multiple:true});
+  * Fix of Windows UNC shared path that contains non-ascii characters;
+
 ## 5.0.3.15
 
 ### Fixes:

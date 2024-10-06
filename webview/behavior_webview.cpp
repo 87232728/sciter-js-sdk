@@ -258,7 +258,7 @@ namespace sciter
             sciter::string strSrc = src.to_string();
 			dom::element self = dom::element(this_element);
 			self.set_attribute("src", strSrc.c_str());
-			on_src_changed();
+			//on_src_changed();
 			return true;
 		}
 
